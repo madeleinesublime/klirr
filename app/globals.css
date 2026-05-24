@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Prevent text size adjustment on iOS orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Smooth, native-feeling tap on iOS */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure full height on iOS Safari */
+body {
+  min-height: 100dvh;
+}

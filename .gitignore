@@ -1,0 +1,11 @@
+.claude/
+node_modules/
+.next/
+data/
+*.db
+
+.env
+.env.local
+.env.production.local
+
+.DS_Store
