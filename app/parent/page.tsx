@@ -442,24 +442,22 @@ function Dashboard({
         <div className="bg-white rounded-2xl shadow-sm p-5">
           <h2 className="font-semibold text-gray-700 mb-3 text-sm">Ge pengar</h2>
           <form onSubmit={handleAdd} className="space-y-3">
-            <div className="flex gap-2">
-              <input
-                type="number"
-                min="1"
-                value={addAmount}
-                onChange={(e) => setAddAmount(e.target.value)}
-                placeholder="Belopp (kr)"
-                className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm"
-                required
-              />
-              <input
-                type="text"
-                value={addDesc}
-                onChange={(e) => setAddDesc(e.target.value)}
-                placeholder="Beskrivning (valfri)"
-                className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm"
-              />
-            </div>
+            <input
+              type="number"
+              min="1"
+              value={addAmount}
+              onChange={(e) => setAddAmount(e.target.value)}
+              placeholder="Belopp (kr)"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm"
+              required
+            />
+            <input
+              type="text"
+              value={addDesc}
+              onChange={(e) => setAddDesc(e.target.value)}
+              placeholder="Beskrivning (valfri)"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm"
+            />
             <button
               type="submit"
               disabled={loading}
@@ -474,24 +472,22 @@ function Dashboard({
         <div className="bg-white rounded-2xl shadow-sm p-5">
           <h2 className="font-semibold text-gray-700 mb-3 text-sm">Dra av pengar (köp)</h2>
           <form onSubmit={handleDeduct} className="space-y-3">
-            <div className="flex gap-2">
-              <input
-                type="number"
-                min="1"
-                value={deductAmount}
-                onChange={(e) => setDeductAmount(e.target.value)}
-                placeholder="Belopp (kr)"
-                className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm"
-                required
-              />
-              <input
-                type="text"
-                value={deductDesc}
-                onChange={(e) => setDeductDesc(e.target.value)}
-                placeholder="Vad köptes?"
-                className="flex-1 border border-gray-200 rounded-xl px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm"
-              />
-            </div>
+            <input
+              type="number"
+              min="1"
+              value={deductAmount}
+              onChange={(e) => setDeductAmount(e.target.value)}
+              placeholder="Belopp (kr)"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm"
+              required
+            />
+            <input
+              type="text"
+              value={deductDesc}
+              onChange={(e) => setDeductDesc(e.target.value)}
+              placeholder="Vad köptes?"
+              className="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm"
+            />
             <button
               type="submit"
               disabled={loading}
