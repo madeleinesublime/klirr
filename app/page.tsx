@@ -192,7 +192,7 @@ export default function Home() {
       {/* Header */}
       <div className="text-center mb-8">
         <div className="text-7xl mb-2 drop-shadow">🐷</div>
-        <h1 className="text-4xl font-extrabold text-white tracking-tight">Veckis</h1>
+        <h1 className="text-4xl font-extrabold text-white tracking-tight">Klirr</h1>
         <p className="text-emerald-100 mt-1 text-base">
           {data.settings.child_name}s pengar
         </p>

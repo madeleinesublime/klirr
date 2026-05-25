@@ -20,13 +20,13 @@ export default function Icon() {
         <span
           style={{
             color: 'white',
-            fontSize: '96px',
-            fontWeight: 'bold',
+            fontSize: '110px',
+            fontWeight: 900,
             fontFamily: 'sans-serif',
-            letterSpacing: '-4px',
+            letterSpacing: '-2px',
           }}
         >
-          kr
+          K
         </span>
       </div>
     ),

@@ -1,6 +1,6 @@
 {
-  "name": "Veckis",
-  "short_name": "Veckis",
+  "name": "Klirr",
+  "short_name": "Klirr",
   "description": "Håll koll på veckopengarna",
   "start_url": "/",
   "display": "standalone",
@@ -15,7 +15,7 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/icon",
+      "src": "/apple-icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

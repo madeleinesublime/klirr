@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Veckis',
+  title: 'Klirr',
   description: 'Håll koll på veckopengarna',
   manifest: '/manifest.json',
   themeColor: '#10b981',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Veckis',
+    title: 'Klirr',
   },
 }
 
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="sv">
       <head>
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
+        <link rel="apple-touch-icon" sizes="512x512" href="/apple-icon.png" />
       </head>
       <body>{children}</body>
     </html>
