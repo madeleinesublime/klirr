@@ -264,7 +264,7 @@ export default function Home() {
       {/* Parent link */}
       <button
         onClick={() => router.push('/parent')}
-        className="mt-10 text-emerald-200 text-xs opacity-40 hover:opacity-80 transition-opacity active:opacity-100"
+        className="mt-10 text-white text-sm font-medium hover:text-emerald-100 transition-colors active:scale-95"
       >
         🔒 Föräldravy
       </button>
