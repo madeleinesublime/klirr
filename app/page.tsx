@@ -188,13 +188,13 @@ export default function Home() {
       : `📅 Veckopeng om ${days} dagar`
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-400 to-teal-600 flex flex-col items-center px-4 pt-14 pb-10">
+    <div className="min-h-screen bg-gradient-to-b from-emerald-400 to-teal-600 flex flex-col items-center px-4 pt-6 pb-10">
       {/* Header */}
-      <div className="flex items-center gap-4 mb-8 w-full max-w-sm">
-        <img src="/girl.png" alt="" className="h-40 flex-shrink-0" />
-        <div>
-          <h1 className="text-4xl font-extrabold text-white tracking-tight">Klirr</h1>
-          <p className="text-emerald-100 mt-1 text-base">
+      <div className="flex items-end gap-4 mb-0 w-full max-w-sm">
+        <img src="/girl.png" alt="" className="h-56 flex-shrink-0" />
+        <div className="pb-3">
+          <h1 className="text-5xl font-extrabold text-white tracking-tight">Klirr</h1>
+          <p className="text-emerald-100 mt-1 text-lg">
             {data.settings.child_name}s pengar
           </p>
         </div>
