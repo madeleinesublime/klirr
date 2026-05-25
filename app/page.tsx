@@ -190,12 +190,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-400 to-teal-600 flex flex-col items-center px-4 pt-14 pb-10">
       {/* Header */}
-      <div className="text-center mb-8">
-        <img src="/girl.png" alt="" className="h-40 block mx-auto mb-2 mix-blend-multiply" />
-        <h1 className="text-4xl font-extrabold text-white tracking-tight">Klirr</h1>
-        <p className="text-emerald-100 mt-1 text-base">
-          {data.settings.child_name}s pengar
-        </p>
+      <div className="flex items-center gap-4 mb-8 w-full max-w-sm">
+        <img src="/girl.png" alt="" className="h-40 flex-shrink-0" />
+        <div>
+          <h1 className="text-4xl font-extrabold text-white tracking-tight">Klirr</h1>
+          <p className="text-emerald-100 mt-1 text-base">
+            {data.settings.child_name}s pengar
+          </p>
+        </div>
       </div>
 
       {/* Balance card */}
