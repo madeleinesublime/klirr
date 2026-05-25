@@ -1,4 +1,4 @@
-import { addTransaction, getBalance, verifyPin } from '@/lib/db'
+import { addTransaction, deleteTransaction, getBalance, verifyPin } from '@/lib/db'
 
 export async function POST(request: Request) {
   const body = await request.json()
@@ -21,4 +21,20 @@ export async function POST(request: Request) {
   const balance = getBalance()
 
   return Response.json({ transaction: tx, balance })
+}
+
+export async function DELETE(request: Request) {
+  const body = await request.json()
+  const { pin, id } = body as { pin: string; id: number }
+
+  if (!verifyPin(pin)) {
+    return Response.json({ error: 'Fel PIN-kod' }, { status: 401 })
+  }
+
+  if (typeof id !== 'number') {
+    return Response.json({ error: 'Ogiltigt id' }, { status: 400 })
+  }
+
+  deleteTransaction(id)
+  return Response.json({ balance: getBalance() })
 }

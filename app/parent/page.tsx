@@ -537,6 +537,25 @@ function Dashboard({
                 >
                   {t.amount > 0 ? '+' : ''}{t.amount} kr
                 </span>
+                <button
+                  onClick={async () => {
+                    if (!confirm(`Ta bort "${t.description}"?`)) return
+                    setLoading(true)
+                    const res = await fetch('/api/transactions', {
+                      method: 'DELETE',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ pin: sessionPin, id: t.id }),
+                    })
+                    setLoading(false)
+                    if (res.ok) await onRefresh()
+                    else notify('Kunde inte ta bort transaktionen', true)
+                  }}
+                  disabled={loading}
+                  className="ml-3 text-gray-300 hover:text-rose-400 transition-colors flex-shrink-0 text-lg leading-none disabled:opacity-40"
+                  title="Ta bort"
+                >
+                  ×
+                </button>
               </div>
             ))
           )}

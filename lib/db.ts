@@ -129,6 +129,10 @@ export function addTransaction(
     .get(result.lastInsertRowid) as Transaction
 }
 
+export function deleteTransaction(id: number): void {
+  getDb().prepare('DELETE FROM transactions WHERE id = ?').run(id)
+}
+
 // ── Auto top-up ───────────────────────────────────────────────────────────────
 
 export function checkAndDoTopup(): boolean {
