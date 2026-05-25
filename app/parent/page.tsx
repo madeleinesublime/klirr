@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 type Stage = 'loading' | 'setup' | 'pin' | 'dashboard'
 
@@ -126,7 +127,7 @@ function SetupScreen({
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 py-8">
       <div className="w-full max-w-sm bg-white rounded-3xl shadow-xl p-8">
         <div className="text-center mb-7">
-          <img src="/girl.png" alt="" className="h-28 block mx-auto mb-3" />
+          <Image src="/girl.png" alt="" width={544} height={724} priority className="h-28 w-auto mx-auto mb-3" />
           <h1 className="text-2xl font-bold text-gray-800">Välkommen till Klirr!</h1>
           <p className="text-gray-500 text-sm mt-1">Ställ in appen första gången</p>
         </div>
