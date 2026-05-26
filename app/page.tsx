@@ -162,8 +162,106 @@ function StatsCard({ transactions, balance }: { transactions: Transaction[]; bal
   )
 }
 
+function BuyModal({
+  balance,
+  onClose,
+  onSuccess,
+}: {
+  balance: number
+  onClose: () => void
+  onSuccess: (newBalance: number) => void
+}) {
+  const [amount, setAmount] = useState('')
+  const [description, setDescription] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    const num = parseInt(amount, 10)
+    if (!num || num <= 0) { setError('Ange ett belopp'); return }
+    if (num > balance) { setError('Du har inte så mycket pengar'); return }
+    if (!description.trim()) { setError('Beskriv vad du köpte'); return }
+
+    setError('')
+    setLoading(true)
+    try {
+      const res = await fetch('/api/purchase', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: num, description: description.trim() }),
+      })
+      const json = await res.json()
+      if (!res.ok) { setError(json.error || 'Något gick fel'); return }
+      onSuccess(json.balance)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center"
+      style={{ background: 'rgba(0,0,0,0.4)' }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
+    >
+      <div className="w-full max-w-sm bg-white rounded-t-3xl px-6 pt-6 pb-10 shadow-2xl">
+        <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-5" />
+        <h2 className="text-xl font-black text-gray-800 mb-1">Köp något</h2>
+        <p className="text-sm text-gray-400 mb-6">Du har {balance} kr kvar</p>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 mb-1.5">Belopp</label>
+            <div className="flex items-center bg-gray-50 rounded-2xl px-4 py-3 border border-gray-100">
+              <input
+                type="number"
+                inputMode="numeric"
+                min={1}
+                max={balance}
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="0"
+                autoFocus
+                className="flex-1 bg-transparent text-2xl font-black text-gray-800 outline-none tabular-nums w-full"
+              />
+              <span className="text-gray-400 font-semibold ml-2">kr</span>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 mb-1.5">Vad köpte du?</label>
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="t.ex. Godis, Leksak…"
+              maxLength={80}
+              className="w-full bg-gray-50 rounded-2xl px-4 py-3 border border-gray-100 text-gray-800 outline-none text-base"
+            />
+          </div>
+          {error && <p className="text-rose-500 text-sm font-medium">{error}</p>}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-emerald-500 text-white font-black text-lg rounded-2xl py-4 mt-2 active:scale-95 transition-transform disabled:opacity-60"
+          >
+            {loading ? 'Köper…' : 'Genomför köp'}
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-full text-gray-400 text-sm py-2"
+          >
+            Avbryt
+          </button>
+        </form>
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
   const [data, setData] = useState<AppData | null>(null)
+  const [showBuy, setShowBuy] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -210,12 +308,18 @@ export default function Home() {
           </span>
           <span className="text-3xl font-bold text-emerald-400 mb-2">kr</span>
         </div>
-        <div className="bg-emerald-50 rounded-2xl py-3 px-4">
+        <div className="bg-emerald-50 rounded-2xl py-3 px-4 mb-5">
           <p className="text-emerald-700 font-medium text-sm">{countdownText}</p>
           <p className="text-emerald-500 text-xs mt-0.5">
             {data.settings.weekly_amount} kr / vecka
           </p>
         </div>
+        <button
+          onClick={() => setShowBuy(true)}
+          className="w-full bg-emerald-500 text-white font-black text-lg rounded-2xl py-4 active:scale-95 transition-transform shadow-md"
+        >
+          Köp
+        </button>
       </div>
 
       {/* Transactions */}
@@ -271,6 +375,17 @@ export default function Home() {
       >
         🔒 Föräldravy
       </button>
+
+      {showBuy && (
+        <BuyModal
+          balance={data.balance}
+          onClose={() => setShowBuy(false)}
+          onSuccess={() => {
+            setShowBuy(false)
+            fetch('/api/balance').then((r) => r.json()).then(setData)
+          }}
+        />
+      )}
     </div>
   )
 }
