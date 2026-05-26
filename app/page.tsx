@@ -37,9 +37,9 @@ function daysUntilTopup(topupDay: number, lastTopupDate: string): number {
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr + (dateStr.includes('T') ? '' : 'Z'))
+  const toDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate())
   const now = new Date()
-  const diffMs = now.getTime() - date.getTime()
-  const diffDays = Math.floor(diffMs / 86_400_000)
+  const diffDays = Math.round((toDay(now).getTime() - toDay(date).getTime()) / 86_400_000)
   if (diffDays === 0) return 'Idag'
   if (diffDays === 1) return 'Igår'
   if (diffDays < 7) return `${diffDays} dagar sedan`
